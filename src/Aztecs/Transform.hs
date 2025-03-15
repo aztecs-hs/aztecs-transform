@@ -29,7 +29,7 @@ module Aztecs.Transform
     -- * Systems
 
     -- ** 2D
-    propagateTransforms2D,
+    propagateTransforms2d,
 
     -- ** Generic
     propagateTransforms,
@@ -79,8 +79,8 @@ newtype Size a = Size {unSize :: a}
 
 instance (Typeable a) => Component (Size a)
 
-propagateTransforms2D :: System (Access ())
-propagateTransforms2D = propagateTransforms @(V2 Int) @Float @(V2 Float)
+propagateTransforms2d :: System (Access ())
+propagateTransforms2d = propagateTransforms @(V2 Int) @(V2 Float) @Float
 
 propagateTransforms ::
   forall t s r.
