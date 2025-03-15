@@ -44,7 +44,7 @@ import Aztecs.Hierarchy
 import Data.Data (Typeable)
 import Linear
 
-type Transform2D = Transform (V2 Int) Float (V2 Float)
+type Transform2D = Transform (V2 Int) (V2 Float) Float
 
 data Transform t s r = Transform
   { transformTranslation :: t,
@@ -59,15 +59,15 @@ instance (Num t, Num s, Num r) => Semigroup (Transform t s r) where
 instance (Num t, Num s, Num r) => Monoid (Transform t s r) where
   mempty = Transform 0 1 0
 
-transform2d :: V2 Int -> Float -> V2 Float -> Transform2D
-transform2d = Transform
+transform2d :: Transform2D
+transform2d = transform
 
 transform :: (Num t, Num s, Num r) => Transform t s r
 transform = mempty
 
 instance (Typeable t, Typeable s, Typeable r) => Component (Transform t s r)
 
-type GlobalTransform2D = GlobalTransform (V2 Int) Float (V2 Float)
+type GlobalTransform2D = GlobalTransform (V2 Int) (V2 Float) Float
 
 newtype GlobalTransform t s r = GlobalTransform {unGlobalTransform :: Transform t s r}
 
