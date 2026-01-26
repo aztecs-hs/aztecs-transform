@@ -1,27 +1,18 @@
 cabal-version: 2.4
 name:          aztecs-transform
-version:       0.2.0.0
+version:       0.3.0
 license:       BSD-3-Clause
 license-file:  LICENSE
 maintainer:    matt@hunzinger.me
 author:        Matt Hunzinger
 homepage:      https://github.com/matthunz/aztecs
-synopsis:
-    A type-safe and friendly Entity-Component-System (ECS) for Haskell
-
-description:
-    The Entity-Component-System (ECS) pattern is commonly used in video game develop to represent world objects.
-    .
-    ECS follows the principal of composition over inheritence. Each type of
-    object (e.g. sword, monster, etc), in the game has a unique EntityId. Each
-    entity has various Components associated with it (material, weight, damage, etc).
-    Systems act on entities which have the required Components.
-
+synopsis:      Transform components for Aztecs
+description:   Transform components for the Aztecs game engine and ECS
 category:      Game Engine
 
 source-repository head
     type:     git
-    location: https://github.com/matthunz/aztecs.git
+    location: https://github.com/matthunz/aztecs-transform.git
 
 library
     exposed-modules:  Aztecs.Transform

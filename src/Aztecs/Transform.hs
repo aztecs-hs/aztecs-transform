@@ -25,6 +25,8 @@ module Aztecs.Transform
     GlobalTransform (..),
     transform,
     Size (..),
+
+    module Linear
   )
 where
 
