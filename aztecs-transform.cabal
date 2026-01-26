@@ -30,22 +30,6 @@ library
     ghc-options:      -Wall
     build-depends:
         base >=4.6 && <5,
-        aztecs >=0.12 && <0.13,
-        aztecs-hierarchy >=0.2 && <0.3,
+        aztecs >=0.16 && <0.17,
         containers >=0.6 && <0.9,
-        linear >=1,
-        mtl >=2 && <3
-
-test-suite aztecs-hierarchy-test
-    type:             exitcode-stdio-1.0
-    main-is:          Main.hs
-    hs-source-dirs:   test
-    default-language: Haskell2010
-    ghc-options:      -Wall
-    build-depends:
-        base >=4.6 && <5,
-        aztecs,
-        aztecs-hierarchy,
-        containers >=0.6,
-        hspec >=2,
-        QuickCheck >=2
+        linear >=1
