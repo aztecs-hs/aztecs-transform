@@ -1,3 +1,4 @@
+{-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE ScopedTypeVariables #-}
@@ -25,8 +26,7 @@ module Aztecs.Transform
     GlobalTransform (..),
     transform,
     Size (..),
-
-    module Linear
+    module Linear,
   )
 where
 
@@ -43,9 +43,7 @@ type GlobalTransform2D = GlobalTransform (V2 Int) (V2 Float) Float
 newtype GlobalTransform t s r = GlobalTransform {unGlobalTransform :: Transform t s r}
   deriving (Show)
 
-instance
-  (Monad m, Typeable t, Typeable s, Typeable r) =>
-  Component m (GlobalTransform t s r)
+instance (Monad m, Typeable t, Typeable s, Typeable r) => Component m (GlobalTransform t s r)
 
 type Size2D = Size (V2 Float)
 
@@ -57,9 +55,9 @@ instance (Monad m, Typeable a) => Component m (Size a)
 type Transform2D = Transform (V2 Int) (V2 Float) Float
 
 data Transform t s r = Transform
-  { transformTranslation :: t,
-    transformScale :: s,
-    transformRotation :: r
+  { transformTranslation :: !t,
+    transformScale :: !s,
+    transformRotation :: !r
   }
   deriving (Show)
 
@@ -79,7 +77,7 @@ instance
     propagateToChildren e globalT
 
   componentOnChange e _ newLocalT = do
-    globalT <- computeGlobalTransform e newLocalT
+    !globalT <- computeGlobalTransform e newLocalT
     insertUntracked e . bundle $ GlobalTransform @t @s @r globalT
     propagateToChildren e globalT
 
@@ -100,11 +98,11 @@ propagateToChildren parentE parentGlobal = do
   where
     propagateToChild :: EntityID -> Access m ()
     propagateToChild childE = do
-      maybeLocalT <- lookup @_ @(Transform t s r) childE
+      !maybeLocalT <- lookup @_ @(Transform t s r) childE
       case maybeLocalT of
         Nothing -> return ()
         Just localT -> do
-          let childGlobal = localT <> parentGlobal
+          let !childGlobal = localT <> parentGlobal
           insertUntracked childE . bundle $ GlobalTransform @t @s @r childGlobal
           propagateToChildren childE childGlobal
 
