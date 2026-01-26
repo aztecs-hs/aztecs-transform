@@ -1,6 +1,6 @@
 cabal-version: 2.4
 name:          aztecs-transform
-version:       0.3.1
+version:       0.3.2
 license:       BSD-3-Clause
 license-file:  LICENSE
 maintainer:    matt@hunzinger.me
@@ -21,6 +21,6 @@ library
     ghc-options:      -Wall
     build-depends:
         base >=4.6 && <5,
-        aztecs >=0.16 && <0.17,
+        aztecs >=0.16 && <0.18,
         containers >=0.6 && <0.9,
         linear >=1
